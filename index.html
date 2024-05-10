@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <title>Cash Register | ghandidev</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ubuntu+Sans+Mono:wght@400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <img
+          src="./img/logogdevb-removebg-white.png"
+          width="40px"
+          alt="logo de ghandidev"
+        />
+        <p>ghandidev</p>
+      </div>
+      <h2>Cash Register</h1>
+    </header>
+    <main>
+      <div id="change-due" class="hide">Status:</div>
+      <form>
+        <label class="label-cash" for="cash">Enter cash from customer:</label>
+        <input id="cash" name="cash" type="number" placeholder="$$" required />
+        <button id="purchase-btn" class="btn" type="button">Purchase</button>
+      </form>
+      <div class="container">
+        <div class="border-screen">
+          <div class="screen">Total: $3.26</div>
+        </div>
+        <div class="base-screen"></div>
+        <div class="btns">
+          <div class="n-btn">7</div>
+          <div class="n-btn">8</div>
+          <div class="n-btn">9</div>
+          <div class="n-btn">4</div>
+          <div class="n-btn">5</div>
+          <div class="n-btn">6</div>
+          <div class="n-btn">1</div>
+          <div class="n-btn">2</div>
+          <div class="n-btn">3</div>
+          <div class="n-btn">0</div>
+          <div class="n-btn">.</div>
+          <div class="n-btn">+</div>
+        </div>
+        <div class="list-container">
+          <p>Change in drawer:</p>
+          <ul>
+            <li>bonbon</li>
+            <li>chocolate</li>
+            <li>fresa</li>
+            <li>vainilla</li>
+            <li>alfajor</li>
+            <li>marquesa</li>
+            <li>tiramisu</li>
+            <li>milhojas</li>
+            <li>helado</li>
+          </ul>
+        </div>
+      </div>
+      <div class="drawer">
+        <div class="circule">^</div>
+      </div>
+    </main>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
