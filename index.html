@@ -27,15 +27,15 @@
       <h2>Cash Register</h1>
     </header>
     <main>
-      <div id="change-due" class="hide">Status:</div>
       <form>
+        <div id="change-due" class="status hide"></div>
         <label class="label-cash" for="cash">Enter cash from customer:</label>
-        <input id="cash" name="cash" type="number" placeholder="$$" required />
+        <input id="cash" name="cash" type="number" placeholder="$$" value="" />
         <button id="purchase-btn" class="btn" type="button">Purchase</button>
       </form>
       <div class="container">
         <div class="border-screen">
-          <div class="screen">Total: $3.26</div>
+          <div class="screen"></div>
         </div>
         <div class="base-screen"></div>
         <div class="btns">
@@ -53,22 +53,13 @@
           <div class="n-btn">+</div>
         </div>
         <div class="list-container">
-          <p>Change in drawer:</p>
-          <ul>
-            <li>bonbon</li>
-            <li>chocolate</li>
-            <li>fresa</li>
-            <li>vainilla</li>
-            <li>alfajor</li>
-            <li>marquesa</li>
-            <li>tiramisu</li>
-            <li>milhojas</li>
-            <li>helado</li>
-          </ul>
         </div>
       </div>
       <div class="drawer">
-        <div class="circule">^</div>
+        <div class="int-drawer"></div>
+        <button class="open-drawer">
+          <div class="circule">^</div>
+        </button>
       </div>
     </main>
 

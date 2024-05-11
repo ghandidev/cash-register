@@ -41,14 +41,7 @@ h2 {
   text-align: center;
   margin-bottom: 5px;
 }
-#change-due {
-  color: var(--text-color);
-  text-align: center;
-  padding: 10px;
-}
-.hide {
-  display: none;
-}
+
 form {
   display: flex;
   flex-direction: column;
@@ -59,6 +52,26 @@ form {
   margin: 0 auto;
   border-radius: 4px;
 }
+form > .status {
+  position: absolute;
+  left: 20%;
+  top: 25%;
+  color: var(--text-color);
+  text-align: center;
+  padding: 10px;
+  width: 350px;
+  height: 200px;
+  border: 2px solid var(--screen-color);
+  border-radius: 10px;
+  backdrop-filter: blur(15px);
+  font-size: 1.1rem;
+  z-index: 1;
+}
+
+.hide {
+  display: none;
+}
+
 .label-cash {
   color: var(--text-color);
   text-align: center;
@@ -104,7 +117,7 @@ form {
   border-top-right-radius: 40px;
   min-width: 350px;
   max-width: 400px;
-  height: 300px;
+  height: 290px;
   margin: 0 auto;
   margin-top: 50px;
 }
@@ -173,38 +186,84 @@ form {
   position: relative;
   top: -185px;
   left: 160px;
-  max-width: 55%;
+  max-width: 56%;
   height: 260px;
-  padding: 10px;
   border-radius: 16px;
   background-color: var(--dark-gray);
 }
 .container > .list-container > p {
   color: var(--text-color);
   text-align: center;
-  margin-bottom: 5px;
+  margin: 10px 0;
   word-wrap: break-word;
   font-size: 1rem;
 }
-.container > .list-container > ul {
+.container > .list-container > li {
   color: var(--text-color);
-  list-style: square;
+  list-style: none;
   margin-left: 15px;
-  font-size: 1em;
+  font-size: 1rem;
 }
 .drawer {
   display: flex;
   justify-content: center;
-  align-items: center;
+  flex-wrap: wrap;
   background-color: var(--cash-reg-color);
   border: 3px solid var(--screen-color);
   max-width: 440px;
   margin: 5px auto;
   height: 60px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.drawer > .int-drawer {
+  position: relative;
+  top: 3px;
+  background-color: var(--screen-color);
   border-top-left-radius: 14px;
   border-top-right-radius: 14px;
+  width: 96%;
+  height: 90%;
 }
-.drawer > .circule {
+.drawer > .open-drawer {
+  display: flex;
+  position: relative;
+  top: -45px;
+  background-color: var(--cash-reg-color);
+  border-top-left-radius: 14px;
+  border-top-right-radius: 14px;
+  width: 96%;
+  height: 90%;
+  border: 2px solid var(--screen-color);
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.open {
+  animation: shimmy 2s forwards 1s;
+  animation-direction: alternate;
+}
+.close {
+  animation: shimmyReverse 3s forwards;
+  animation-direction: alternate;
+}
+@keyframes shimmy {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(10px, 25px);
+  }
+}
+@keyframes shimmyReverse {
+  0% {
+    transform: translate(10px, 25px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+.drawer > .open-drawer > .circule {
   display: flex;
   background-color: var(--dark-gray);
   width: 20px;
