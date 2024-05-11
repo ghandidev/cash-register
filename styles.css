@@ -54,20 +54,23 @@ form {
 }
 form > .status {
   position: absolute;
-  left: 20%;
+  left: 5%;
   top: 25%;
   color: var(--text-color);
   text-align: center;
-  padding: 10px;
-  width: 350px;
-  height: 200px;
+  padding: 20px 10px 10px 10px;
+  width: 250px;
+  height: 300px;
   border: 2px solid var(--screen-color);
   border-radius: 10px;
   backdrop-filter: blur(15px);
   font-size: 1.1rem;
   z-index: 1;
 }
-
+form > .status > ul {
+  margin-top: 10px;
+  list-style: none;
+}
 .hide {
   display: none;
 }

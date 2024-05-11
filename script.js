@@ -1,3 +1,4 @@
+const purchaseForm = document.getElementById('purchase-form');
 const inputCash = document.getElementById('cash');
 const changeDue = document.getElementById('change-due');
 const btnPurchase = document.getElementById('purchase-btn');
@@ -6,6 +7,7 @@ const screenPrice = document.querySelector(
 );
 const drawer = document.querySelector('.drawer > .open-drawer');
 const cashInDrawer = document.querySelector('.container > .list-container');
+const buttons = document.querySelectorAll('.n-btn');
 
 let price = 1.87;
 let cid = [
@@ -22,7 +24,7 @@ let cid = [
 
 screenPrice.textContent = `Total: $ ${price}`;
 
-const insertCid = () => {
+const showCid = () => {
   cashInDrawer.innerHTML = '';
   const p = document.createElement('p');
   p.textContent = 'Change in drawer:';
@@ -37,7 +39,13 @@ const insertCid = () => {
     cashInDrawer.appendChild(listItem);
   });
 };
-insertCid();
+showCid();
+
+const createListItem = (text) => {
+  const listItem = document.createElement('li');
+  listItem.innerText = text;
+  return listItem;
+};
 
 const calculateChange = () => {
   let cash = parseFloat(inputCash.value);
@@ -45,38 +53,47 @@ const calculateChange = () => {
 
   if (cash < price) {
     alert('Customer does not have enough money to purchase the item');
-  } else if (change === 0) {
+    changeDue.classList.add('hide');
+  } else if (cash === price) {
     changeDue.innerText = 'No change due - customer paid with exact cash';
+    drawer.classList.remove('open');
   } else {
     let changeArr = getChangeToGive(change, cid);
+    let totalCashInDrawer = cid.reduce((acc, item) => acc + item[1], 0);
 
-    if (changeArr.length === 0) {
+    if (totalCashInDrawer < change || changeArr.length === 0) {
       changeDue.innerText = 'Status: INSUFFICIENT_FUNDS';
+      drawer.classList.add('close');
     } else {
-      let changeMsg = 'Status: OPEN ';
+      let changeDueText = 'Status: OPEN';
+      drawer.classList.add('open');
+      if (totalCashInDrawer === change) {
+        changeDueText = 'Status: CLOSED';
+      }
+      drawer.classList.replace('close', 'open');
+      changeDue.innerText = changeDueText;
+      const changeMsg = document.createElement('ul');
       changeArr.forEach((arr) => {
-        changeMsg += `${arr[0]}: $${arr[1].toFixed(2)} `;
+        const listItem = document.createElement('li');
+        listItem.innerText = `${arr[0]}: $${arr[1].toFixed(2)}`;
+        changeMsg.appendChild(listItem);
       });
-      changeDue.innerText = changeMsg;
+      changeDue.appendChild(changeMsg);
 
-      // Actualizar valores en el array cid
-      changeArr.forEach((changeItem) => {
-        let currencyName = changeItem[0];
-        let currencyValue = changeItem[1];
-        cid.forEach((item) => {
-          if (item[0] === currencyName) {
-            item[1] -= currencyValue;
+      cid.forEach((item) => {
+        let currencyName = item[0];
+        let currencyValue = item[1];
+        changeArr.forEach((changeItem) => {
+          if (changeItem[0] === currencyName) {
+            item[1] -= changeItem[1];
           }
         });
       });
-
-      // Actualizar la visualización en el documento
-      insertCid();
+      showCid();
     }
   }
 };
 
-// Función para obtener el cambio a devolver al cliente
 const getChangeToGive = (change, cid) => {
   let currencyUnit = {
     'ONE HUNDRED': 100.0,
@@ -114,22 +131,38 @@ const getChangeToGive = (change, cid) => {
   return changeToGive;
 };
 
-btnPurchase.addEventListener('click', () => {
+const handlePurchase = () => {
+  if (inputCash.value.trim() === '') {
+    return;
+  }
   changeDue.classList.remove('hide');
-  drawer.classList.add('open');
-  drawer.classList.remove('close');
   calculateChange();
+  inputCash.value = '';
+};
+
+purchaseForm.addEventListener('submit', (event) => {
+  event.preventDefault(); // Evita que el formulario se envíe
+  handlePurchase();
+});
+
+btnPurchase.addEventListener('click', () => {
+  handlePurchase();
+});
+
+inputCash.addEventListener('keypress', (event) => {
+  if (event.key === 'Enter') {
+    handlePurchase();
+  }
 });
 
 drawer.addEventListener('click', () => {
   changeDue.classList.add('hide');
   drawer.classList.replace('open', 'close');
-  change = '';
 });
 
-/* // Función para obtener el total en el cajón
- let changeAvailable = getCidTotal(cid);
-
-const getCidTotal = (cid) => {
-  return cid.reduce((acc, curr) => acc + curr[1], 0);
-}; */
+buttons.forEach((button) => {
+  button.addEventListener('click', () => {
+    const value = button.textContent;
+    inputCash.value += value;
+  });
+});
