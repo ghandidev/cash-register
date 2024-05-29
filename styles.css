@@ -54,7 +54,7 @@ form {
 }
 form > .status {
   position: absolute;
-  left: 5%;
+  left: 20%;
   top: 25%;
   color: var(--text-color);
   text-align: center;
@@ -65,7 +65,31 @@ form > .status {
   border-radius: 10px;
   backdrop-filter: blur(15px);
   font-size: 1.1rem;
+  transition: 0.3s ease;
   z-index: 1;
+}
+@media screen and (max-width: 1200px) {
+  form {
+    width: 450px;
+  }
+  form .status {
+    left: 18%;
+  }
+}
+@media screen and (max-width: 768px) {
+  form {
+    width: 400px;
+  }
+  form .status {
+    left: 10%;
+    top: 28%;
+  }
+}
+@media screen and (max-width: 500px) {
+  form .status {
+    left: 0;
+    top: 28%;
+  }
 }
 form > .status > ul {
   margin-top: 10px;
